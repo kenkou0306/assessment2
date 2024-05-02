@@ -15,14 +15,28 @@ assessmentButton.addEventListener(
 
     //診断表示エリアの作成
     resultDivision.innerText = '';
-    const header = document.createElement('h3');
-    header.innerText = '診断結果';
-    resultDivision.appendChild(header);
+
+    //headerDivisionの作成
+    const headerDvision = document.createElement('div');
+    headerDvision.setAttribute('class','card-header text-bg-primary');
+    headerDvision.innerText = '診断結果';
+
+    //bodyDivisionの作成
+    const bodyDivision = document.createElement('div');
+    bodyDivision.setAttribute('class','card-body');
 
     const paragraph = document.createElement('p');
-    const result = assesment(userName);
+    paragraph.setAttribute('class','card-text');
+    const result = assessment(userName);
     paragraph.innerText = result;
-    resultDivision.appendChild(paragraph);
+    bodyDivision.appendChild(paragraph);
+
+    //resultDivisionにBootstrapのスタイルを適用する
+    resultDivision.setAttribute('class','card');
+
+    //headerDivisonとbodyDivisionをresultDivisionに差し込む
+    resultDivision.appendChild(headerDvision);
+    resultDivision.appendChild(bodyDivision);
 
     //ツイートエリアの作成
     tweetDivision.innerText = '';
@@ -80,7 +94,7 @@ const answers = [
  * @param {string} userName ユーザの名前
  * @return {string}診断結果
  */
-function assesment(userName) {
+function assessment(userName) {
   //全文字コード番号の合計を回答の数で割って添え字の数値を求める
 
   let sumOfCharCode = 0;
@@ -103,7 +117,7 @@ function test() {
   //太郎
   console.log('太郎');
   console.assert(
-    assesment('太郎') === '太郎のいいところは決断力です。太郎がする決断にいつも助けられる人がいます。',
+    assessment('太郎') === '太郎のいいところは決断力です。太郎がする決断にいつも助けられる人がいます。',
     '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
   );
 
@@ -111,14 +125,14 @@ function test() {
   //次郎
   console.log('次郎');
   console.assert(
-    assesment('次郎') === '次郎のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる次郎が皆から評価されています。',
+    assessment('次郎') === '次郎のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる次郎が皆から評価されています。',
     '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
   );
 
   //花子
   console.log('花子');
   console.assert(
-    assesment('花子') === '花子のいいところはまなざしです。花子に見つめられた人は、気になって仕方がないでしょう。',
+    assessment('花子') === '花子のいいところはまなざしです。花子に見つめられた人は、気になって仕方がないでしょう。',
     '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
   );
 
@@ -128,20 +142,20 @@ function test() {
   //太郎
   console.log('太郎')
   console.assert(
-    assesment('太郎') === assesment('太郎'),
+    assessment('太郎') === assessment('太郎'),
     '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
   )
   //次郎
   console.log('次郎')
   console.assert(
-    assesment('次郎') === assesment('次郎'),
+    assessment('次郎') === assessment('次郎'),
     '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
   )
 
   //花子
   console.log('花子')
   console.assert(
-    assesment('花子') === assesment('花子'),
+    assessment('花子') === assessment('花子'),
     '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
   )
   console.log('同じ名前なら同じ結果を出力することのテストテスト終了')
